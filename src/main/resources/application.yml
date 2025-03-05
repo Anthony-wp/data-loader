@@ -1,0 +1,69 @@
+server:
+  port: 8081
+
+management:
+  server:
+    port: 8082
+  endpoints:
+    web:
+      exposure:
+        include: info, health, shutdown
+  datadog:
+    metrics:
+      export:
+        enabled: false
+  endpoint:
+    shutdown:
+      access: unrestricted
+  info:
+    git:
+      mode: full
+  metrics:
+    data:
+      repository:
+        autotime:
+          enabled: true
+    web:
+      server:
+        request:
+          autotime:
+            enabled: true
+      client:
+        request:
+          autotime:
+            enabled: true
+    enable:
+      all: false
+      api:
+        rate:
+          limiter: true
+        request:
+          duration: true
+      spring:
+        integration: false
+      jvm:
+        memory: true
+        threads: true
+      aws.rds.mysql.replica.lag: true
+    export:
+      prometheus:
+        enabled: true
+
+spring:
+  application:
+    name: vulnerability-data-loader
+  data:
+    mongodb:
+      uri: mongodb://root:1qaz2wsXX@localhost:27017/dataloaderdb?authSource=admin
+
+data:
+  mongodb:
+    uri: mongodb://root:1qaz2wsXX@localhost:27017/dataloaderdb?authSource=admin
+
+threads:
+  virtual:
+    enabled: true
+
+cpe:
+  api:
+    url: "https://services.nvd.nist.gov"
